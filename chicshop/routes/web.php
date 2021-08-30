@@ -51,13 +51,28 @@ Route::prefix('/admin')->group(function(){
     });
     Route::get('/products/list', function () {
         $products=DB::table('products')->get();
-       
+
         return view('admin.product.list',['products'=>$products]);
     });
-    Route::get('/products/edit', function () {
-        $products=DB::table('products')->edit();
-       
-        return view('admin.product.list',['products'=>$products]);
+    Route::get('/products/{id}/edit', function ($id) {
+        $product=Product::findOrFail($id);
+        return view('admin.product.edit',['product'=>$product]);
+    });
+    Route::post('/products/{id}/edit', function ($id) {
+        $validated_data=Validator::make(request()->all(),[
+            'title'=>'required',
+             'body'=>'required'
+        ])->validated();
+       $product=Product::findOrFail($id);
+       $product->update([
+        'title'=>$validated_data['title'],
+        'user_id'=>1,
+        'body'=>$validated_data['body'],
+        'slug'=>$validated_data['title'],
+        'description'=>$validated_data['title'],
+        'price'=>$validated_data['title'],
+        'imageUrl'=>$validated_data['title']
+       ]);
     });
 });
 
