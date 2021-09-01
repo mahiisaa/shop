@@ -17,8 +17,8 @@
 <input type="text" name="title" class="form-control" value={{$product->title}} >
 </div>
     <div class="form-group">
-    <textarea name="body" id="body" cols="30" rows="10" class="form-control" value={{$product->description}}>
-
+    <textarea name="body" id="body" cols="30" rows="10" class="form-control">
+    {{$product->body}}
      </textarea>
     </div>
     
