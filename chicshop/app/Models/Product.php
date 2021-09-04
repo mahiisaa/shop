@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','description', 'body','slug','price','user_id','imageUrl'];
+    protected $fillable = ['title','description','body','slug','price','user_id','imageUrl'];
 }

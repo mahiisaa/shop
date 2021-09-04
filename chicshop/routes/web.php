@@ -18,7 +18,7 @@ Route::get('/', "App\Http\Controllers\HomeController@index");
 Route::get('/contactus', "App\Http\Controllers\HomeController@contactUs");
 Route::get('/aboutus', "App\Http\Controllers\HomeController@aboutUs");
 Route::get('/blog', "App\Http\Controllers\HomeController@blog");
-Route::prefix('/admin')->namespace("App\Http\Controllers\Admin")->group(function(){
+Route::prefix('/admin')->namespace("App\Http\Controllers\Admin")->middleware('auth')->group(function(){
     Route::get('/products',"ProductController@index");
     Route::get('/products/create', "ProductController@create");
     Route::post('/products/create', "ProductController@store"); 
@@ -28,3 +28,7 @@ Route::prefix('/admin')->namespace("App\Http\Controllers\Admin")->group(function
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
